@@ -3,6 +3,7 @@ module.exports = {
 		{
 			name: "Tribot",
 			script: "bun src/index.js",
+			interpreter: "bun",
 		},
 	],
 };
