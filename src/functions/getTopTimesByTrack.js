@@ -27,6 +27,7 @@ const getTopTimesByTrack = async (id, filter) => {
 		}
 
 		let primeirosTres = items.slice(0, 3);
+		console.log("items: " + items);
 
 		primeirosTres = primeirosTres.map((item) => ({
 			rank: item.rank,
