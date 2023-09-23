@@ -41,7 +41,7 @@ const getTopTimesByTrack = async (id, filter) => {
 			.map(
 				(item) =>
 					`**${item.rank}.** ${item.personaName} - ${getClass(
-						item.carClass
+						item.carRating
 					)} - ${item.carName} - ${mphToKmph(
 						item.topSpeed
 					)} km/h - ${msToTime(item.durationMs)} - ${timestampToDate(
