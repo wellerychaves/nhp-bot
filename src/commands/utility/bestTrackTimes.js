@@ -4,7 +4,7 @@ const { getTopTimesByTrack } = require("../../functions/getTopTimesByTrack");
 const description = "Retorna os 3 pilotos mais rápidos da pista";
 
 const data = new SlashCommandBuilder()
-	.setName("top-track-players")
+	.setName("track-leaders")
 	.setDescription(description)
 	.addIntegerOption((option) =>
 		option
