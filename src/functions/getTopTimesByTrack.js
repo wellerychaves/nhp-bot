@@ -1,5 +1,5 @@
 const axios = require("axios");
-const mphToKmph = require("../utils/convertImperialToMetric");
+const convertSpeed = require("../utils/convertSpeed");
 const { msToTime, timestampToDate } = require("../utils/convertMsToTime");
 const { getClass } = require("../utils/getCarClass");
 
@@ -21,6 +21,11 @@ const getTopTimesByTrack = async (id, filter) => {
 	try {
 		const res = await axios.get(url);
 		const items = res.data.items;
+
+		if (items.length === 0) {
+			return "Não há tempos a serem exibidos.";
+		}
+
 		let primeirosTres = items.slice(0, 3);
 
 		primeirosTres = primeirosTres.map((item) => ({
@@ -42,7 +47,7 @@ const getTopTimesByTrack = async (id, filter) => {
 				(item) =>
 					`**${item.rank}.** ${item.personaName} - ${getClass(
 						item.carRating
-					)} - ${item.carName} - ${mphToKmph(
+					)} - ${item.carName} - ${convertSpeed(
 						item.topSpeed
 					)} km/h - ${msToTime(item.durationMs)} - ${timestampToDate(
 						item.recordedAt
