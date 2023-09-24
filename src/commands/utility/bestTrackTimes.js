@@ -46,6 +46,7 @@ module.exports = {
 
 			if (filter >= 1 && filter <= 3) {
 				const returnString = await getTopTimesByTrack(id, filter);
+
 				await interaction.reply(returnString);
 			} else {
 				await interaction.reply({
@@ -63,3 +64,6 @@ module.exports = {
 		}
 	},
 };
+//
+//await wait(1000);
+//await interaction.editReply(shuffleStrings(interactionOptions));
