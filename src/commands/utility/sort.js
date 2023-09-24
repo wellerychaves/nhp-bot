@@ -54,17 +54,16 @@ module.exports = {
 	data,
 	async execute(interaction) {
 		let interactionOptions;
-		const equalMessage = `Você quer sortear ${interactionOptions[0].value} nomes e me forneceu apenas ${interactionOptions[0].value} nomes... Acho que você já fez o meu trabalho.`;
 
 		if (interaction.options._hoistedOptions.length > 2) {
 			interactionOptions = interaction.options._hoistedOptions;
-
 			if (interactionOptions[0].value === interactionOptions.length - 1) {
+				const equalMessage = `Você quer sortear ${interactionOptions[0].value} nomes e me forneceu apenas ${interactionOptions[0].value} nomes... Acho que você já fez o meu trabalho.`;
+
 				await interaction.reply({
 					ephemeral: true,
 					content: equalMessage,
 				});
-				return;
 			} else {
 				await interaction.reply(shuffleStrings(interactionOptions));
 				//await interaction.reply("### E o resultado do sorteio é...");
