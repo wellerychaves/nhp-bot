@@ -3,7 +3,7 @@ const convertSpeed = require("../utils/convertSpeed");
 const { msToTime, timestampToDate } = require("../utils/convertMsToTime");
 const { getClass } = require("../utils/getCarClass");
 
-const getTopTimesByTrack = async (id, filter) => {
+const getTopTimesByTrack = async (id, filter, carClassNumber) => {
 	const filters = {
 		1: "",
 		2: "?filter=with_powerups",
@@ -20,15 +20,19 @@ const getTopTimesByTrack = async (id, filter) => {
 
 	try {
 		const res = await axios.get(url);
-		const items = res.data.items;
+		let items = res.data.items;
 
 		if (items.length === 0) {
 			return "Não há tempos a serem exibidos.";
 		}
 
-		let primeirosTres = items.slice(0, 3);
+		if (carClassNumber) {
+			items = items.filter((obj) => obj.carRating <= carClassNumber);
+		}
 
-		primeirosTres = primeirosTres.map((item) => ({
+		let firstFive = items.slice(0, 5);
+
+		firstFive = firstFive.map((item) => ({
 			rank: item.rank,
 			personaId: item.personaId,
 			personaName: item.personaName,
@@ -42,20 +46,36 @@ const getTopTimesByTrack = async (id, filter) => {
 			recordedAt: item.recordedAt,
 		}));
 
-		const templateString = primeirosTres
-			.map(
-				(item) =>
-					`**${item.rank}.** ${item.personaName} - ${getClass(
-						item.carRating
-					)} - ${item.carName} - ${convertSpeed(
-						item.topSpeed
-					)} km/h - ${msToTime(item.durationMs)} - ${timestampToDate(
-						item.recordedAt
-					)}`
-			)
-			.join("\n");
+		let maxNameLength = Math.max(
+			...firstFive.map((item) => item.personaName.length)
+		);
+		let maxCarNameLength = Math.max(
+			...firstFive.map((item) => item.carName.length)
+		);
 
-		const returnString = `## Melhores tempos da pista: ${primeirosTres[0].eventName} | Filtro: ${filterNames[filter]}\n${templateString}`;
+		let templateString =
+			"```\n" +
+			firstFive
+				.map(
+					(item) =>
+						item.rank +
+						". " +
+						item.personaName.padEnd(maxNameLength, " ") +
+						" - " +
+						getClass(item.carRating) +
+						" - " +
+						item.carName.padEnd(maxCarNameLength, " ") +
+						" - " +
+						convertSpeed(item.topSpeed) +
+						" km/h - " +
+						msToTime(item.durationMs) +
+						" - " +
+						timestampToDate(item.recordedAt)
+				)
+				.join("\n") +
+			"\n```";
+
+		const returnString = `## Melhores tempos da pista: ${firstFive[0].eventName} | Filtro: ${filterNames[filter]}\n${templateString}`;
 
 		return returnString;
 	} catch (error) {
@@ -64,3 +84,5 @@ const getTopTimesByTrack = async (id, filter) => {
 };
 
 module.exports = { getTopTimesByTrack };
+
+// getTopTimesByTrack(1698, 3, 849);
