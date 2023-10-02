@@ -21,9 +21,11 @@ const shuffleStrings = (array) => {
 
 	let resultString = "";
 	for (let index = 0; index < result.length; index++) {
-		resultString += `- ${result[index]}\n`;
+		resultString += `\t **${result[index]}**\n`;
 	}
-	const returnString = `### Resultado do sorteio:\n${resultString}`;
+
+	const sortedValues = optionsToShuffle.join("\n- ");
+	const returnString = `## Resultado do sorteio:\n ${resultString}\nValores sorteados:\n - ${sortedValues} `;
 
 	return returnString;
 };
