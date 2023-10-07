@@ -16,7 +16,7 @@ const sortOrder = (array) => {
 
 	let resultString = "";
 	for (let i = 0; i < result.length; i++) {
-		resultString += `${i + 1}- ${result[i]}\n`;
+		resultString += `**${i + 1}.** ${result[i]}\n`;
 	}
 	const returnString = `### Resultado do sorteio:\n${resultString}`;
 

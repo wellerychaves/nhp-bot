@@ -18,6 +18,8 @@ const getTopTimesByTrack = async (id, filter, carClassNumber) => {
 
 	const url = `https://panel.worldunited.gg/api/events/${id}/best-times${filters[filter]}`;
 
+	let carClass = "Todas";
+
 	try {
 		const res = await axios.get(url);
 		let items = res.data.items;
@@ -28,6 +30,7 @@ const getTopTimesByTrack = async (id, filter, carClassNumber) => {
 
 		if (carClassNumber) {
 			items = items.filter((obj) => obj.carRating <= carClassNumber);
+			carClass = getClass(carClassNumber);
 		}
 
 		let firstFive = items.slice(0, 5);
@@ -54,7 +57,7 @@ const getTopTimesByTrack = async (id, filter, carClassNumber) => {
 		);
 
 		let templateString =
-			"```\n" +
+			"```Markdown\n" +
 			firstFive
 				.map(
 					(item) =>
@@ -75,8 +78,11 @@ const getTopTimesByTrack = async (id, filter, carClassNumber) => {
 				.join("\n") +
 			"\n```";
 
-		const returnString = `## Melhores tempos da pista: ${firstFive[0].eventName} | Filtro: ${filterNames[filter]}\n${templateString}`;
-
+		//const returnString = `## Melhores tempos da pista: ${firstFive[0].eventName} | Filtro: ${filterNames[filter]} \n${templateString}`;
+		const returnString =
+			`## Melhores tempos da pista: ${firstFive[0].eventName} | Filtro: ${filterNames[filter]}` +
+			(carClass ? ` | Classe: ${carClass}` : "") +
+			`\n${templateString}`;
 		return returnString;
 	} catch (error) {
 		console.error(error);
