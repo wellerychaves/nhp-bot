@@ -1,4 +1,4 @@
-function dateFormatter(date, type) {
+const dateFormatter = (date, type) => {
 	if (type === "date") {
 		return date.toLocaleString("pt-BR", {
 			month: "2-digit",
@@ -10,6 +10,6 @@ function dateFormatter(date, type) {
 			minute: "2-digit",
 		});
 	}
-}
+};
 
 module.exports = dateFormatter;

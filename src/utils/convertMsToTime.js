@@ -1,4 +1,3 @@
-//convertMsToTime.js
 const msToTime = (duration) => {
 	let milliseconds = parseInt((duration % 1000) / 10),
 		seconds = Math.floor((duration / 1000) % 60),
