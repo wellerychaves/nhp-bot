@@ -1,5 +1,4 @@
 const { shuffleStrings } = require("../../functions/shuffle");
-// const wait = require("node:timers/promises").setTimeout;
 const { SlashCommandBuilder } = require("discord.js");
 
 const description = "Realiza sorteio";
@@ -53,28 +52,17 @@ const data = new SlashCommandBuilder()
 module.exports = {
 	data,
 	async execute(interaction) {
-		let interactionOptions;
+		const interactionOptions = interaction.options.data;
 
-		if (interaction.options._hoistedOptions.length > 2) {
-			interactionOptions = interaction.options._hoistedOptions;
-			if (interactionOptions[0].value === interactionOptions.length - 1) {
-				const equalMessage = `Você quer sortear ${interactionOptions[0].value} nomes e me forneceu apenas ${interactionOptions[0].value} nomes... Acho que você já fez o meu trabalho.`;
+		if (interactionOptions[0].value === interactionOptions.length - 1) {
+			const equalMessage = `Você quer sortear ${interactionOptions[0].value} nomes e me forneceu apenas ${interactionOptions[0].value} nomes... Acho que você já fez o meu trabalho.`;
 
-				await interaction.reply({
-					ephemeral: true,
-					content: equalMessage,
-				});
-			} else {
-				await interaction.reply(shuffleStrings(interactionOptions));
-				//await interaction.reply("### E o resultado do sorteio é...");
-				//await wait(1000);
-				//await interaction.editReply(shuffleStrings(interactionOptions));
-			}
-		} else {
 			await interaction.reply({
-				content: requirementsMessage,
 				ephemeral: true,
+				content: equalMessage,
 			});
+		} else {
+			await interaction.reply(shuffleStrings(interactionOptions));
 		}
 	},
 };

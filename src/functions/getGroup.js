@@ -1,7 +1,7 @@
 const dateFormatter = require("../utils/dateFormatter");
 const startDate = new Date("2023-08-12T04:00:00-03:00");
 
-function getGroup() {
+const getGroup = () => {
 	const now = new Date();
 	const hoursDiff = (now - startDate) / 36e5;
 	const currentGroup = Math.ceil(hoursDiff) % 20 || 20;
@@ -9,9 +9,9 @@ function getGroup() {
 	const message = `A tabela atual é a **${currentGroup}/20**. Consulte a tabela em <#1124124150840180866>`;
 
 	return message;
-}
+};
 
-function getNextGroupDate(groupNumber) {
+const getNextGroupDate = (groupNumber) => {
 	const now = new Date();
 	const hoursDiff = (now - startDate) / 36e5;
 	const currentGroup = Math.ceil(hoursDiff) % 20 || 20;
@@ -43,7 +43,7 @@ function getNextGroupDate(groupNumber) {
 
 		return message;
 	}
-}
+};
 
 module.exports = {
 	getGroup,

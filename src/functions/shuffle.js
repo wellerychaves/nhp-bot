@@ -1,28 +1,39 @@
+const shuffle = (array) => {
+	let currentIndex = array.length,
+		temporaryValue,
+		randomIndex;
+
+	while (0 !== currentIndex) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+
+	return array;
+};
+
 const shuffleStrings = (array) => {
 	const optionsToShuffle = [];
 	let quantia;
 
-	for (let index = 0; index < array.length; index++) {
-		if (array[index].name !== "quantia") {
-			optionsToShuffle.push(array[index].value);
+	array.forEach((item) => {
+		if (item.name !== "quantia") {
+			optionsToShuffle.push(item.value);
 		} else {
-			quantia = array[index].value;
+			quantia = item.value;
 		}
-	}
+	});
 
-	const result = [];
-	const remainingOptions = [...optionsToShuffle];
-
-	for (let index = 0; index < quantia; index++) {
-		const sortedIndex = Math.floor(Math.random() * remainingOptions.length);
-		result.push(remainingOptions[sortedIndex]);
-		remainingOptions.splice(sortedIndex, 1);
-	}
+	const shuffledOptions = shuffle(optionsToShuffle);
+	const result = shuffledOptions.slice(0, quantia);
 
 	let resultString = "";
-	for (let index = 0; index < result.length; index++) {
-		resultString += `\t **${result[index]}**\n`;
-	}
+	result.forEach((res) => {
+		resultString += `- **${res}**\n`;
+	});
 
 	const sortedValues = optionsToShuffle.join("\n- ");
 	const returnString = `## Resultado do sorteio:\n ${resultString}\nValores sorteados:\n - ${sortedValues} `;

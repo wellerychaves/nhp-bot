@@ -15,8 +15,8 @@ const data = new SlashCommandBuilder()
 	.addStringOption((option) =>
 		option
 			.setName("filter")
-			.setDescription("Selecione o filtro desejado")
 			.setRequired(true)
+			.setDescription("Selecione o filtro desejado")
 			.addChoices(
 				{ name: "All times", value: "1" },
 				{ name: "Powerups-only", value: "2" },
@@ -30,10 +30,9 @@ const data = new SlashCommandBuilder()
 				"Insira a clase do carro pela qual deseja exibir resultados"
 			)
 			.addChoices(
-				{ name: "S2", value: "1300" },
 				{ name: "S1", value: "849" },
 				{ name: "A", value: "749" },
-				{ name: "B", value: "699" },
+				{ name: "B", value: "599" },
 				{ name: "C", value: "499" },
 				{ name: "D", value: "399" },
 				{ name: "E", value: "249" }
@@ -43,44 +42,12 @@ const data = new SlashCommandBuilder()
 module.exports = {
 	data,
 	async execute(interaction) {
-		let interactionOptions;
+		const id = interaction.options.getInteger("id");
+		const filter = interaction.options.getString("filter");
+		const carClass = interaction.options.getString("class", false);
 
-		if (interaction.options._hoistedOptions.length > 1) {
-			interactionOptions = interaction.options._hoistedOptions;
+		const returnString = await getTopTimesByTrack(id, filter, carClass);
 
-			let id, filter, carClass;
-
-			const idObj = interactionOptions.find((obj) => obj.name === "id");
-			const filterObj = interactionOptions.find(
-				(obj) => obj.name === "filter"
-			);
-			const classObj = interactionOptions.find(
-				(obj) => obj.name === "class"
-			);
-
-			if (idObj) {
-				id = idObj.value;
-			}
-
-			if (filterObj) {
-				filter = filterObj.value;
-			}
-			if (classObj) {
-				carClass = classObj.value;
-			}
-
-			const returnString = await getTopTimesByTrack(id, filter, carClass);
-
-			await interaction.reply(returnString);
-		} else {
-			await interaction.reply({
-				content:
-					"Ouve um erro inesperado, contate o ADW para verificar o erro",
-				ephemeral: true,
-			});
-		}
+		interaction.reply(returnString);
 	},
 };
-//
-//await wait(1000);
-//await interaction.editReply(shuffleStrings(interactionOptions));

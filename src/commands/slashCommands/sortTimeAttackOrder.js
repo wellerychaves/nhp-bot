@@ -33,16 +33,11 @@ const data = new SlashCommandBuilder()
 
 module.exports = {
 	data,
-	async execute(interaction) {
-		let interactionOptions;
+	execute(interaction) {
+		let interactionOptions = interaction.options.data;
 
-		if (interaction.options._hoistedOptions.length > 2) {
-			interactionOptions = interaction.options._hoistedOptions;
-			await interaction.reply(sortOrder(interactionOptions));
-		} else {
-			await interaction.reply(
-				"insira os valores necessários para que eu possa sortear"
-			);
-		}
+		const result = sortOrder(interactionOptions);
+
+		interaction.reply(result);
 	},
 };
