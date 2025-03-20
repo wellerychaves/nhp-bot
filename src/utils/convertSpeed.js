@@ -1,6 +1,4 @@
-const convertSpeed = (ms) => {
-	let kmh = ms * 3.6;
-	return parseFloat(kmh.toFixed(2));
+export const convertSpeed = (ms) => {
+	const kmh = ms * 3.6;
+	return Number.parseFloat(kmh.toFixed(2));
 };
-
-module.exports = convertSpeed;

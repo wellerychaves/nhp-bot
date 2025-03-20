@@ -1,4 +1,4 @@
-const dateFormatter = (date, type) => {
+export const dateFormatter = (date, type) => {
 	if (type === "date") {
 		return date.toLocaleString("pt-BR", {
 			month: "2-digit",
@@ -11,5 +11,3 @@ const dateFormatter = (date, type) => {
 		});
 	}
 };
-
-module.exports = dateFormatter;

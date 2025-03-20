@@ -1,5 +1,5 @@
-const msToTime = (duration) => {
-	let milliseconds = parseInt((duration % 1000) / 10),
+export const msToTime = (duration) => {
+	let milliseconds = Number.parseInt((duration % 1000) / 10),
 		seconds = Math.floor((duration / 1000) % 60),
 		minutes = Math.floor((duration / (1000 * 60)) % 60);
 
@@ -10,7 +10,7 @@ const msToTime = (duration) => {
 	return minutes + ":" + seconds + "." + milliseconds;
 };
 
-const timestampToDate = (timestamp) => {
+export const timestampToDate = (timestamp) => {
 	const date = new Date(timestamp);
 	const day = date.getDate().toString().padStart(2, "0");
 	const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -20,5 +20,3 @@ const timestampToDate = (timestamp) => {
 
 	return `${day}/${month}/${year} às ${hours}:${minutes}`;
 };
-
-module.exports = { msToTime, timestampToDate };
