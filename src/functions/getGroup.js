@@ -1,51 +1,46 @@
-const dateFormatter = require("../utils/dateFormatter");
-const startDate = new Date("2023-08-12T04:00:00-03:00");
+import { dateFormatter } from "../utils/dateFormatter";
+const startDate = new Date("2025-03-16T20:00:00-03:00");
 
-const getGroup = () => {
+const interval = 2 * 36e5;
+
+export const getGroup = () => {
 	const now = new Date();
-	const hoursDiff = (now - startDate) / 36e5;
+	const hoursDiff = (now - startDate) / 72e5;
 	const currentGroup = Math.ceil(hoursDiff) % 20 || 20;
 
-	const message = `A tabela atual é a **${currentGroup}/20**. Consulte a tabela em <#1124124150840180866>`;
+	const message = `The current group is **${currentGroup}/20**. See the table [here](<https://bit.ly/3XMIZwc>)`;
 
 	return message;
 };
 
-const getNextGroupDate = (groupNumber) => {
+export const getNextGroupDate = (groupNumber) => {
 	const now = new Date();
-	const hoursDiff = (now - startDate) / 36e5;
+	const hoursDiff = (now - startDate) / interval;
 	const currentGroup = Math.ceil(hoursDiff) % 20 || 20;
 
 	if (groupNumber === currentGroup) {
 		const nextGroupInHours = 20;
-		const nextGroupDate = new Date(now.getTime() + nextGroupInHours * 36e5);
+		const nextGroupDate = new Date(now.getTime() + nextGroupInHours * interval);
 		nextGroupDate.setMinutes(0);
 
 		const formattedDate = dateFormatter(nextGroupDate, "date");
 		const formattedTime = dateFormatter(nextGroupDate, "time");
 
-		const message = `O grupo **${groupNumber}** está agora na rotação!\nA proxima rotação deste grupo será dia **${formattedDate}** a partir das **${formattedTime}**`;
+		const message = `The group **${groupNumber}** is now in rotation!\nThe next rotation of this group will be on **${formattedDate}** at **${formattedTime}**`;
 
 		return message;
 	} else {
 		const nextGroupInHours =
-			groupNumber >= currentGroup
-				? groupNumber - currentGroup
-				: 20 - currentGroup + groupNumber;
+			groupNumber >= currentGroup ? groupNumber - currentGroup : 20 - currentGroup + groupNumber;
 
-		const nextGroupDate = new Date(now.getTime() + nextGroupInHours * 36e5);
+		const nextGroupDate = new Date(now.getTime() + nextGroupInHours * interval);
 		nextGroupDate.setMinutes(0);
 
 		const formattedDate = dateFormatter(nextGroupDate, "date");
 		const formattedTime = dateFormatter(nextGroupDate, "time");
 
-		const message = `O grupo **${groupNumber}** será dia **${formattedDate}** a partir das **${formattedTime}**`;
+		const message = `The group **${groupNumber}** will be on **${formattedDate}** from **${formattedTime}**`;
 
 		return message;
 	}
-};
-
-module.exports = {
-	getGroup,
-	getNextGroupDate,
 };
