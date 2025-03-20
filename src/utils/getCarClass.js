@@ -1,18 +1,18 @@
-const getClass = (value) => {
+export const getClass = (value) => {
 	const classes = {
-		0: "Classe E",
-		250: "Classe D",
-		400: "Classe C",
-		500: "Classe B",
-		600: "Classe A",
-		750: "Classe S1",
-		850: "Classe S2",
+		0: "Class E",
+		250: "Class D",
+		400: "Class C",
+		500: "Class B",
+		600: "Class A",
+		750: "Class S1",
+		850: "Class S2",
 	};
 
 	const keys = Object.keys(classes)
 		.map(Number)
 		.sort((a, b) => a - b);
-	let result = "Valor inválido";
+	let result = "Invalid value";
 
 	keys.forEach((key) => {
 		if (value >= key) {
@@ -22,5 +22,3 @@ const getClass = (value) => {
 
 	return result;
 };
-
-module.exports = { getClass };

@@ -1,4 +1,4 @@
-const sortOrder = (array) => {
+export const sortOrder = (array) => {
 	const optionsToShuffle = [];
 
 	for (let index = 0; index < array.length; index++) {
@@ -18,9 +18,7 @@ const sortOrder = (array) => {
 	for (let i = 0; i < result.length; i++) {
 		resultString += `**${i + 1}.** ${result[i]}\n`;
 	}
-	const returnString = `### Resultado do sorteio:\n${resultString}`;
+	const returnString = `### Draw results:\n${resultString}`;
 
 	return returnString;
 };
-
-module.exports = { sortOrder };

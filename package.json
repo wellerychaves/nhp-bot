@@ -1,16 +1,18 @@
 {
-  "module": "index.ts",
-  "type": "commonjs",
-  "scripts": {
-    "start": "bun src/index.js",
-    "deploy": "bun src/deploy-commands.js"
-  },
-  "dependencies": {
-    "axios": "^1.5.1",
-    "discord.js": "^14.13.0"
-  },
-  "devDependencies": {
-    "bun-types": "latest",
-    "eslint": "^8.50.0"
-  }
+	"module": "index.ts",
+	"type": "module",
+	"scripts": {
+		"start": "bun src/index.js",
+		"deploy": "bun src/deploy-commands.js",
+		"lint": "bunx biome lint --write ."
+	},
+	"dependencies": {
+		"axios": "^1.8.4",
+		"discord.js": "^14.18.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"bun-types": "latest",
+		"eslint": "^8.57.1"
+	}
 }

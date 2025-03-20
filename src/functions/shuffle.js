@@ -1,9 +1,9 @@
-const shuffle = (array) => {
+export const shuffle = (array) => {
 	let currentIndex = array.length,
 		temporaryValue,
 		randomIndex;
 
-	while (0 !== currentIndex) {
+	while (currentIndex !== 0) {
 		randomIndex = Math.floor(Math.random() * currentIndex);
 		currentIndex -= 1;
 
@@ -15,12 +15,12 @@ const shuffle = (array) => {
 	return array;
 };
 
-const shuffleStrings = (array) => {
+export const shuffleStrings = (array) => {
 	const optionsToShuffle = [];
 	let quantia;
 
 	array.forEach((item) => {
-		if (item.name !== "quantia") {
+		if (item.name !== "quantity") {
 			optionsToShuffle.push(item.value);
 		} else {
 			quantia = item.value;
@@ -36,9 +36,7 @@ const shuffleStrings = (array) => {
 	});
 
 	const sortedValues = optionsToShuffle.join("\n- ");
-	const returnString = `## Resultado do sorteio:\n ${resultString}\nValores sorteados:\n - ${sortedValues} `;
+	const returnString = `## Draw result:\n ${resultString}\nValues drawn:\n - ${sortedValues} `;
 
 	return returnString;
 };
-
-module.exports = { shuffleStrings };

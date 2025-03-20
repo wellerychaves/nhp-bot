@@ -1,10 +1,10 @@
 module.exports = {
-  apps: [
-    {
-      name: "Tribot",
-      script: "bun",
-      args: "start",
-      interpreter: "none",
-    },
-  ],
+	apps: [
+		{
+			name: "NHP Bot",
+			script: "bun",
+			args: "start",
+			interpreter: "none",
+		},
+	],
 };
