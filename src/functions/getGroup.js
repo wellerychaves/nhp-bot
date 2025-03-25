@@ -1,4 +1,5 @@
-import { dateFormatter } from "../utils/dateFormatter";
+import { getDiscordTimestamp } from "../utils/dateFormatter.js";
+
 const startDate = new Date("2025-03-16T20:00:00-03:00");
 
 const interval = 2 * 36e5;
@@ -23,10 +24,9 @@ export const getNextRotation = (rotationNumber) => {
 		const nextGroupDate = new Date(now.getTime() + nextGroupInHours * interval);
 		nextGroupDate.setMinutes(0);
 
-		const formattedDate = dateFormatter(nextGroupDate, "date");
-		const formattedTime = dateFormatter(nextGroupDate, "time");
+		const timestamp = getDiscordTimestamp(nextGroupDate, "F");
 
-		const message = `Table **${rotationNumber}** is now in rotation!\nThe next rotation of this group will be on **${formattedDate}** at **${formattedTime}**`;
+		const message = `Table **${rotationNumber}** is now in rotation!\nThe next rotation of this group will be on **${timestamp}**`;
 
 		return message;
 	} else {
@@ -36,10 +36,9 @@ export const getNextRotation = (rotationNumber) => {
 		const nextGroupDate = new Date(now.getTime() + nextGroupInHours * interval);
 		nextGroupDate.setMinutes(0);
 
-		const formattedDate = dateFormatter(nextGroupDate, "date");
-		const formattedTime = dateFormatter(nextGroupDate, "time");
+		const timestamp = getDiscordTimestamp(nextGroupDate, "F");
 
-		const message = `Table **${rotationNumber}** will be in the rotation on **${formattedDate}** at **${formattedTime}**`;
+		const message = `Table **${rotationNumber}** will be in the rotation on **${timestamp}**`;
 
 		return message;
 	}

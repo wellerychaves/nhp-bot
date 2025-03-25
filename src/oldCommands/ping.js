@@ -6,3 +6,4 @@ export const data = {
 export async function execute(interaction) {
 	await interaction.reply("Pong!");
 }
+
