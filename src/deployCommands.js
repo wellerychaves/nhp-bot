@@ -21,8 +21,8 @@ for (const file of commandFiles) {
 // initialize rest
 const rest = new REST({ version: "10" }).setToken(TOKEN);
 
-// register commands
 
+// register commands
 const registerCommands = async () => {
 	try {
 		console.log("Starting update of slash commands...");
