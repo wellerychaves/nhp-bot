@@ -9,7 +9,7 @@ export const getRotation = () => {
 	const hoursDiff = (now - startDate) / interval;
 	const currentGroup = Math.ceil(hoursDiff) % 20 || 20;
 
-	const message = `The current table is **${currentGroup}/20**. See the table [here](<https://bit.ly/3XMIZwc>)`;
+	const message = `The current table is **${currentGroup}/20**. See the table [here](<https://bit.ly/448OGcO>)`;
 
 	return message;
 };
