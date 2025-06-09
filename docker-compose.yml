@@ -1,0 +1,9 @@
+services:
+  discord_bot:
+    build: .
+    image: nhp-bot:latest
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    environment:
+      TZ: UTC 
