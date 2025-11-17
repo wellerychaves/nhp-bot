@@ -1,4 +1,5 @@
 import { REST, Routes } from "discord.js";
+
 const { CLIENT_ID, TOKEN, GUILD_ID } = process.env;
 
 const rest = new REST({ version: "10" }).setToken(TOKEN);
