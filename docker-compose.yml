@@ -2,8 +2,21 @@ services:
   discord_bot:
     build: .
     image: nhp-bot:latest
+    container_name: nhp-bot
     restart: unless-stopped
     env_file:
       - ./.env
     environment:
-      TZ: UTC 
+      TZ: UTC
+    # Opcional: limitar recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    # Opcional: logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
