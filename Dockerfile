@@ -19,4 +19,4 @@ COPY --from=builder /app/src ./src
 
 USER botuser
 
-CMD [ "bun", "run", "start" ]
+CMD ["bun", "src/index.js"]
