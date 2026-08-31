@@ -5,20 +5,22 @@ Discord bot for the **New Horizon Project** server — a Need for Speed World co
 ## Commands
 
 ### `/track-leaders`
+
 Shows the top 10 fastest times on a given track.
 
-| Option | Required | Description |
-|--------|----------|-------------|
-| `id` | ✅ | Track ID |
-| `filter` | ✅ | `All times`, `Powerups-only`, or `No powerups` |
-| `class` | ❌ | Filter by car class: `S1`, `A`, `B`, `C`, `D`, `E` |
+| Option   | Required | Description                                        |
+| -------- | -------- | -------------------------------------------------- |
+| `id`     | ✅       | Track ID                                           |
+| `filter` | ✅       | `All times`, `Powerups-only`, or `No powerups`     |
+| `class`  | ❌       | Filter by car class: `S1`, `A`, `B`, `C`, `D`, `E` |
 
 ### `/rotation`
+
 Shows which of the 20 event tables is currently active.
 
-| Option | Required | Description |
-|--------|----------|-------------|
-| `number` | ❌ | If provided, shows when that table will next appear in rotation |
+| Option   | Required | Description                                                     |
+| -------- | -------- | --------------------------------------------------------------- |
+| `number` | ❌       | If provided, shows when that table will next appear in rotation |
 
 ## Stack
 
@@ -38,6 +40,7 @@ cp .env.example .env
 ```
 
 **.env**
+
 ```ini
 TOKEN=your-bot-token
 CLIENT_ID=your-application-id
